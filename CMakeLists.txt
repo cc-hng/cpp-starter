@@ -7,23 +7,24 @@ project(
   LANGUAGES CXX C)
 
 #####################################
-# compile & link options
-#####################################
-include(cmake/common.cmake)
-
-#####################################
 # third-party packages
 #####################################
-set(MY_LIBS)
-include(FetchContent)
+include(cmake/cpm.cmake)
+cpm_add_package(
+  NAME cc
+  GIT_TAG v0.1.0
+  GITHUB_REPOSITORY cc-hng/cc
+  OPTIONS
+    "CC_ENABLE_IO_URING OFF"
+    "CC_WITH_SQLITE3 ON"
+    "CC_ENABLE_COROUTINE ON"
+)
 
-include(cmake/FetchCC.cmake)
-
-FetchContent_MakeAvailable(${MY_LIBS})
+# compile & link options
+include(${cc_SOURCE_DIR}/cmake/common.cmake)
 
 #####################################
 # target
 #####################################
-
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE cc)
