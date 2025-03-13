@@ -10,9 +10,9 @@ project(
 # third-party packages
 #####################################
 include(cmake/cpm.cmake)
-cpm_add_package(
+CPMAddPackage(
   NAME cc
-  GIT_TAG v0.1.0
+  GIT_TAG v0.1.1
   GITHUB_REPOSITORY cc-hng/cc
   OPTIONS
     "CC_ENABLE_IO_URING OFF"
@@ -26,5 +26,11 @@ include(${cc_SOURCE_DIR}/cmake/common.cmake)
 #####################################
 # target
 #####################################
-add_executable(${PROJECT_NAME} src/main.cpp)
+set(stdafx_header "${CMAKE_CURRENT_SOURCE_DIR}/src/stdafx.h")
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.h")
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+list(REMOVE_ITEM headers ${stdafx_header})
+
+add_executable(${PROJECT_NAME} ${headers} ${sources})
 target_link_libraries(${PROJECT_NAME} PRIVATE cc)
+target_precompile_headers(${PROJECT_NAME} PRIVATE ${stdafx_header})
