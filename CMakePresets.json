@@ -6,7 +6,10 @@
       "name": "base",
       "generator": "Unix Makefiles",
       "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      // "toolchainFile": "$env{VCPKG_HOME}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "Release"
       }
