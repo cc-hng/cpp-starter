@@ -6,7 +6,7 @@ project(
   LANGUAGES CXX C)
 
 include(cmake/cpm.cmake)
-CPMAddPackage("gh:cc-hng/cmake-scripts#v0.1.0")
+CPMAddPackage("gh:cc-hng/cmake-scripts#v0.1.1")
 include(${cmake-scripts_SOURCE_DIR}/ProjectGuard.cmake)
 include(${cmake-scripts_SOURCE_DIR}/core.cmake)
 
@@ -18,11 +18,11 @@ cxx_20()
 #####################################
 # third-party packages
 #####################################
-CPMAddPackage("gh:cc-hng/strings#v0.1.0")
+CPMAddPackage("gh:cc-hng/strings#v0.1.1")
 
 CPMAddPackage(
   NAME cc
-  GIT_TAG v0.1.3
+  GIT_TAG v0.1.5
   GITHUB_REPOSITORY cc-hng/cc
   OPTIONS
     "CC_ENABLE_IO_URING OFF"
@@ -51,3 +51,4 @@ add_executable(${PROJECT_NAME} ${cxx_sources})
 target_link_libraries(${PROJECT_NAME} PRIVATE strings cc spdlog)
 target_precompile_headers(${PROJECT_NAME} PRIVATE ${pch_header})
 target_link_time_optimization(${PROJECT_NAME} REQUIRED)
+# set_target_properties(${PROJECT_NAME} PROPERTIES UNITY_BUILD ON)

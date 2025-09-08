@@ -7,6 +7,7 @@
 #include <boost/asio.hpp>
 #include <cc/asio.hpp>
 #include <cc/lit.hpp>
+#include <gsl/gsl>
 #include <strings.hpp>
 
 static auto& g_asp = cc::AsioPool::instance();
